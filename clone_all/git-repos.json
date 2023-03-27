@@ -1,0 +1,4 @@
+{
+    "mongoengine": "https://github.com/MongoEngine/mongoengine.git",
+    "poetry": "https://github.com/python-poetry/poetry.git"
+}
