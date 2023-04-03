@@ -4,7 +4,7 @@ import time
 
 PATH_TO_HERE = os.getcwd()
 
-def clone_all(directory=None):
+def clone_all(directory=None, skip_pull=True):
     if not directory:
         directory = input(f'Input the directory you want to use (leave empty for default : {os.path.join(PATH_TO_HERE, "all-repos")}:')
         if not directory:
@@ -16,8 +16,11 @@ def clone_all(directory=None):
     for repo_name, repo_url in repo_dict.items():
         print('Getting', repo_name)
         if os.path.exists(os.path.join(directory, repo_name)):
-            print('Pulling', repo_name)
-            os.system(f'cd {os.path.join(directory, repo_name)}; git pull; cd {PATH_TO_HERE}')        
+            if not skip_pull:
+                print('Pulling', repo_name)
+                os.system(f'cd {os.path.join(directory, repo_name)}; git pull; cd {PATH_TO_HERE}')
+            else:
+                print('Skipping pull for', repo_name)
         else:
             print('Cloning', repo_name)
             os.system(f'git clone {repo_url} {os.path.join(directory, repo_name)}')        
